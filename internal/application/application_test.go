@@ -15,7 +15,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 		method         string
 		requestBody    application.Request
 		expectedCode   int
-		expectedResult application.Responce
+		expectedResult application.Response
 	}{
 		{
 			name:   "StatusOK",
@@ -24,7 +24,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "5+4*3",
 			},
 			expectedCode: 200,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Result: 17,
 			},
 		},
@@ -35,7 +35,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "5+5",
 			},
 			expectedCode: 405,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "request method is specified incorrectly",
 			},
 		},
@@ -54,7 +54,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "2/0",
 			},
 			expectedCode: 422,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "division by zero",
 			},
 		},
@@ -65,7 +65,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "4*",
 			},
 			expectedCode: 422,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "unexpected end of the expression",
 			},
 		},
@@ -76,7 +76,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "((5+8)*9",
 			},
 			expectedCode: 422,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "different number of opening and closing brackets",
 			},
 		},
@@ -87,7 +87,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "5+7-8*/2",
 			},
 			expectedCode: 422,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "symbol was encountered instead of a number",
 			},
 		},
@@ -98,7 +98,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Expression: "5d+4*3>",
 			},
 			expectedCode: 422,
-			expectedResult: application.Responce{
+			expectedResult: application.Response{
 				Error: "invalid character was encountered",
 			},
 		},
@@ -122,13 +122,13 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 			if result.StatusCode != testCase.expectedCode {
 				t.Fatalf("expected status code: %d, got: %d", testCase.expectedCode, result.StatusCode)
 			}
-			var responce application.Responce
-			err = json.NewDecoder(result.Body).Decode(&responce)
+			var response application.Response
+			err = json.NewDecoder(result.Body).Decode(&response)
 			if err != nil {
 				t.Fatalf("failed to decode response: %s", err)
 			}
-			if responce != testCase.expectedResult {
-				t.Fatalf("expected response %v, got %v", testCase.expectedResult, responce)
+			if response != testCase.expectedResult {
+				t.Fatalf("expected response %v, got %v", testCase.expectedResult, response)
 			}
 		})
 	}
