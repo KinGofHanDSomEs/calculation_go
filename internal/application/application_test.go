@@ -103,6 +103,7 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 			if err != nil {
 				t.Fatalf("failed to encode request body: %s", err)
 			}
+
 			r := httptest.NewRequest(testCase.method, "/api/v1/calculate", &buf)
 			w := httptest.NewRecorder()
 
@@ -114,11 +115,13 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 			if result.StatusCode != testCase.expectedCode {
 				t.Fatalf("expected status code: %d, got: %d", testCase.expectedCode, result.StatusCode)
 			}
+
 			var response application.Response
 			err = json.NewDecoder(result.Body).Decode(&response)
 			if err != nil {
 				t.Fatalf("failed to decode response: %s", err)
 			}
+
 			if response != testCase.expectedResult {
 				t.Fatalf("expected response %v, got %v", testCase.expectedResult, response)
 			}

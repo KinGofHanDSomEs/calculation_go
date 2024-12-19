@@ -66,6 +66,7 @@ func TestCalc(t *testing.T) {
 			if err != nil {
 				t.Fatalf("correct expression %s returned an error %s", testCase.expression, err)
 			}
+
 			if val != testCase.expectedResult {
 				t.Fatalf("expression %s returned the wrong answer %f, the correct answer %f", testCase.expression, val, testCase.expectedResult)
 			}
@@ -115,6 +116,7 @@ func TestCalc(t *testing.T) {
 			if err == nil {
 				t.Fatalf("expression %s should have returned an error %s, received %f", testCase.expression, testCase.expectedErr, val)
 			}
+
 			if !errors.Is(err, testCase.expectedErr) {
 				t.Fatalf("expression %s should have returned an error %s, received %s", testCase.expression, testCase.expectedErr, err)
 			}
