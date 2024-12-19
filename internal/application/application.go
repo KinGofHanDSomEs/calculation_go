@@ -1,7 +1,6 @@
 package application
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -19,11 +18,6 @@ type Request struct {
 type Response struct {
 	Result float64 `json:"result,omitempty"`
 	Error  string  `json:"error,omitempty"`
-}
-
-type responseWriter struct {
-	http.ResponseWriter
-	body *bytes.Buffer
 }
 
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
@@ -92,7 +86,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonBytes)
 }
 
-func loggingMiddleware(next http.Handler) http.Handler {
+func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 
@@ -117,6 +111,6 @@ func LogOutput(logger zap.SugaredLogger, contentType, body string, statusCode in
 func RunServer() error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/calculate", CalcHandler)
-	handler := loggingMiddleware(mux)
+	handler := LoggingMiddleware(mux)
 	return http.ListenAndServe(":8080", handler)
 }
