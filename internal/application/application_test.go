@@ -39,14 +39,6 @@ func TestCalcHandlerSuccessCase(t *testing.T) {
 				Error: "request method is specified incorrectly",
 			},
 		},
-		// {
-		// 	name: "StatusInternalServerError InternalServer",
-		// 	requestBody: application.Request{},
-		// 	expectedCode: 405,
-		// 	expectedResult: application.Responce{
-		// 		Error: "internal server error",
-		// 	},
-		// },
 		{
 			name:   "StatusUnprocessableEntity DivisionByZero",
 			method: "POST",
