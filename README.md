@@ -108,3 +108,5 @@ go test ./internal/application/application_test.go
 Варианты вывода:
 - ok - тесты выполнились успешно;
 - fail - некоторые тесты вернули ошибку.
+## Обратная связь
+Телеграмм: @KinGofHanDSomEs
