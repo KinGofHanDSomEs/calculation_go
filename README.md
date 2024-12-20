@@ -5,7 +5,8 @@
 2. Установите текстовый редактор [Visual Studio Code](https://code.visualstudio.com/).
 3. Установите систему контроля версий [Git](https://git-scm.com/downloads).
 4. Создайте папку и откройте ее в Visual Studio Code.
-5. Создайте клон репозитория с GitHub. Для этого в терминале Visual Studio Code введите следующую команду:
+5. В проекте слева нажмите на 4 квадратика - extensions. В поле поиска введите go и скачайте первый модуль под названием Go.
+6. Создайте клон репозитория с GitHub. Для этого в терминале Visual Studio Code введите следующую команду:
 ```
 git clone https://github.com/kingofhandsomes/calculation_go
 ```
@@ -108,5 +109,5 @@ go test ./internal/application/application_test.go
 Варианты вывода:
 - ok - тесты выполнились успешно;
 - fail - некоторые тесты вернули ошибку.
-## Обратная связь
+## Связь с разработчиком
 Телеграмм: @KinGofHanDSomEs
