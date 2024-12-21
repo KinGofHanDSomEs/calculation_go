@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/kingofhandsomes/calculation_go/package/calculation"
@@ -112,5 +113,15 @@ func RunServer() error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/calculate", CalcHandler)
 	handler := LoggingMiddleware(mux)
-	return http.ListenAndServe(":8080", handler)
+	var port string
+	fmt.Print("Введите порт: ")
+	fmt.Scanln(&port)
+	if port == "" {
+		port = "8080"
+	}
+	_, err := strconv.Atoi(port)
+	if err != nil {
+		port = "8080"
+	}
+	return http.ListenAndServe(":"+port, handler)
 }
